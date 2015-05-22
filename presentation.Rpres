@@ -1,0 +1,69 @@
+Analysis of violent crime rates by US States
+========================================================
+author: John Doe
+date: May, 2015
+
+The information and analysis
+========================================================
+
+The analyzed dataset includes information in arrests for assault, murder, and rape in each of the 50 US states in 1973, along with the percent of the population living in urban areas.
+
+It comprises 50 observations on the following variables Murder, Assault and Rape arrests (per 100k) and % of urban population.
+
+We plot each assault variable against % of urban population.
+
+see also https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/USArrests.html
+
+Urban % versus Murder, Rape and Assault
+========================================================
+
+```{r, echo=FALSE}
+op <- par(mfrow = c(2, 2), 
+          pty = "s")  
+ xdata = USArrests[,3]
+    ydata = USArrests[,1]
+    regr  = lm(ydata ~ xdata)
+    plot(xdata, ydata, xlab="Urban %", ylab="Murder")
+    abline(regr, col="red")
+ xdata = USArrests[,3]
+    ydata = USArrests[,2]
+    regr  = lm(ydata ~ xdata)
+    plot(xdata, ydata, xlab="Urban %", ylab="Assault")
+    abline(regr, col="red")
+ xdata = USArrests[,3]
+    ydata = USArrests[,4]
+    regr  = lm(ydata ~ xdata)
+    plot(xdata, ydata, xlab="Urban %", ylab="Rape")
+    abline(regr, col="red")
+```
+
+- The red line is a linear regression.
+
+Correlation between variables.
+========================================================
+
+- The correlation between Urban % and Murder is
+```{r, echo=FALSE}
+xdata = USArrests[,3]
+ydata = USArrests[,1]
+cor(xdata,ydata)
+```
+- The correlation between Urban % and Assault is
+```{r, echo=FALSE}
+xdata = USArrests[,3]
+ydata = USArrests[,2]
+cor(xdata,ydata)
+```
+- The correlation between Urban % and Rape is
+```{r, echo=FALSE}
+xdata = USArrests[,3]
+ydata = USArrests[,4]
+cor(xdata,ydata)
+```
+Conclusions
+========================================================
+
+- The slopes seen in the linear regressions are consistent with the correlation.
+- The impact of Urban % on Murder seems to be negligible.
+- The most significant impact is on Rape, with a low correlation value anyway.
+
